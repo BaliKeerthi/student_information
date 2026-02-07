@@ -1,0 +1,45 @@
+<details>
+    <student>
+        <sno>1</sno>
+        <name>Hitman Six</name>
+        <email>hitman_45@gmail.com</email>
+        <Qualification>MCA</Qualification>
+        <creation>2023-10-01</creation>    
+    </student>
+    <student>
+        <sno>2</sno>
+        <name>Keerthi Bali</name>
+        <email>keerthi.bali2004@gmail.com</email>
+        <Qualification>B.Tech</Qualification>
+        <creation>2023-9-05</creation>       
+    </student>
+    <student>
+        <sno>3</sno>
+        <name>Pramila Komarapu</name>
+        <email>har@gmail.com</email>
+        <Qualification>B.Tech</Qualification>
+        <creation>2025-4-01</creation>   
+    </student>
+    <student>
+        <sno>4</sno>
+        <name>Bigil Vj</name>
+        <email>bigil@gmil.com</email>
+        <Qualification>B.Tech</Qualification>
+        <creation>2024-11-01</creation>
+    </student>
+    <student>
+        <sno>5</sno>
+        <name>Swara Aaa</name>
+        <email>sawara_23@gmil.com</email>
+        <Qualification>BE</Qualification>
+        <creation>2024-11-01</creation>
+    </student>
+    <student>
+        <sno>6</sno>
+        <name>Abhi Dynamo</name>
+        <email>abhi@gmil.com</email>
+        <Qualification>MCA</Qualification>
+        <creation>2024-11-01</creation>
+    </student>
+    
+</details>

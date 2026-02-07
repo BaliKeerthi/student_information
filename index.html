@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .close-btn {
+            top: 43%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 400px;
+            padding: 25px 30px 25px 30px;
+            background: linear-gradient(#dff5fc, #a8e0f9);
+            border: 1.5px solid #2ac3ff;
+            margin:40px auto;
+            display: none;
+            position:fixed;
+            z-index: 1001;
+            border-radius: 30px 0px 30px 0px;
+        }
+
+        #hee {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            top: -10px;
+            right: -10px;
+            background: white;
+            border-radius: 50%;
+            border: 1px solid #ccc;
+        }
+
+        #overlay {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+            position: fixed;
+        }
+
+        .forminline {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0px 0px 0px 15px;
+        }
+
+        .forminline label {
+            width: 130px;
+            font-weight: bold;
+        }
+
+        .forminline label span {
+            color: red;
+        }
+
+        .forminline input,
+        .forminline select {
+            flex: 1;
+            padding: 8px;
+            border-radius: 3px;
+            font-size: 14px;
+            border: 1px solid #0077aa;
+        }
+
+        .tooltip {
+            display: inline-block;
+            position: relative;
+        }
+
+        .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: rgb(26, 25, 25);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; 
+            left: 50%;
+            margin-left: -100px;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
+
+        .form-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .form-buttons input {
+            width: 90px;
+            padding: 10px;
+            margin: 0 10px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #k { background: linear-gradient(#a4cc44, #7caf29); }
+        #k1 { background: linear-gradient(#f94e4e, #c93030); }
+
+        body { background-color: #e9fafd; font-family: sans-serif; }
+
+        table {
+            border: 1px solid #cccccc;
+            border-collapse: collapse;
+            margin: auto;
+            width: 80%;
+        }
+
+        th, td {
+            border: 1px solid #cccccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) { background-color: #d5e6f7; }
+        tr:nth-child(odd) { background-color: #ecf3fa; }
+
+        .add { float: right; margin-right: 10px; }
+        h2 { text-align: center; }
+
+        #helpTips {
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            background: #ffffcc;
+            display: none;
+            padding: 10px;
+        }
+
+        .action-img { cursor: pointer; margin-right: 5px; vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <h2>Students Information</h2>
+    <table>
+        <thead>
+            <tr style="background: linear-gradient(to bottom, #1da1d6, #0d7aa6); color: white;">
+                <td colspan="6">
+                    <strong>Student List</strong>
+                    <div class="add">
+                        <img src="https://cdn-icons-png.flaticon.com/16/748/748113.png" onclick="addBtn()" alt="Add" class="action-img">
+                        <a href="#" onclick="addBtn(); return false" style="color:white; text-decoration:none;"><strong>Add</strong></a>
+                    </div>
+                </td>
+            </tr>
+            <tr style="background-color: #43b1d5; color: white;">
+                <th>S.No</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Qualification</th>
+                <th>Created On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="demo">
+            </tbody>
+    </table>
+
+    <div id="overlay"></div>
+
+    <div class="close-btn">
+        <img src="https://cdn-icons-png.flaticon.com/16/1828/1828843.png" id="hee" onclick="closeForm()" alt="Close">
+        <div id="helpTips"></div>
+        <form id="studentForm">
+            <div class="forminline">
+                <label for="name">Name <span>*</span>:</label>
+                <input type="text" name="name" id="name">
+                <div class="tooltip">
+                    <img src="https://cdn-icons-png.flaticon.com/16/1828/1828940.png" width="16" alt="Help">
+                    <span class="tooltiptext">Two words, start with Caps (e.g., John Doe)</span>
+                </div>
+            </div>
+            <div class="forminline">
+                <label for="email">E-mail <span>*</span>:</label>
+                <input type="text" name="email" id="email">
+                <div class="tooltip">
+                    <img src="https://cdn-icons-png.flaticon.com/16/1828/1828940.png" width="16" alt="Help">
+                    <span class="tooltiptext">Must include @ and .</span>
+                </div>
+            </div>
+            <div class="forminline">
+                <label for="qualification">Qualification:</label>
+                <select name="qualification" id="qualification">
+                    <option value="">--Select--</option>
+                    <option value="MCA">MCA</option>
+                    <option value="BE">BE</option>
+                    <option value="B.Tech">B.Tech</option>
+                </select>
+            </div>
+            <div class="form-buttons">
+                <input type="submit" id="k" value="Submit">
+                <input type="reset" id="k1" value="Reset">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let editRow = null;
+        let originalData = { name: "", email: "", qualification: "" };
+
+        // Note: XML request will only work if StudentsData.xml exists in the same folder
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                renderTable(this.responseXML);
+            }
+        };
+        xmlhttp.open("GET", "StudentsData.xml", true);
+        xmlhttp.send();
+
+        function renderTable(xmlDoc) {
+            if (!xmlDoc) return;
+            var students = xmlDoc.getElementsByTagName("student");
+            var tbody = document.getElementById("demo");
+            tbody.innerHTML = "";
+
+            for (var i = 0; i < students.length; i++) {
+                addRowToTable(
+                    students[i].getElementsByTagName("name")[0].textContent,
+                    students[i].getElementsByTagName("email")[0].textContent,
+                    students[i].getElementsByTagName("Qualification")[0].textContent,
+                    students[i].getElementsByTagName("creation")[0].textContent
+                );
+            }
+        }
+
+        function addRowToTable(name, email, qual, date) {
+            let table = document.getElementById("demo");
+            let row = table.insertRow();
+            row.innerHTML = `
+                <td></td>
+                <td>${name}</td>
+                <td>${email}</td>
+                <td>${qual}</td>
+                <td>${date}</td>
+                <td>
+                    <img src="https://cdn-icons-png.flaticon.com/16/1159/1159633.png" onclick="click1(this)" class="action-img" alt="Edit">
+                    <img src="https://cdn-icons-png.flaticon.com/16/1214/1214428.png" onclick="click2(this)" class="action-img" alt="Delete">
+                </td>`;
+            updateSerialNumbers();
+        }
+
+        function updateSerialNumbers() {
+            const rows = document.getElementById("demo").rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+        }
+
+        function click1(element) {
+            editRow = element.closest("tr");
+            let cells = editRow.cells;
+            document.getElementById("name").value = cells[1].innerText;
+            document.getElementById("email").value = cells[2].innerText;
+            document.getElementById("qualification").value = cells[3].innerText;
+            
+            originalData = { name: cells[1].innerText, email: cells[2].innerText, qualification: cells[3].innerText };
+            
+            document.querySelector(".close-btn").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function click2(element) {
+            if (confirm("Delete this student?")) {
+                element.closest("tr").remove();
+                updateSerialNumbers();
+            }
+        }
+
+        function addBtn() {
+            editRow = null;
+            document.getElementById("studentForm").reset();
+            document.querySelector(".close-btn").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closeForm() {
+            document.querySelector(".close-btn").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        document.getElementById("studentForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let qual = document.getElementById("qualification").value;
+
+            // Simple validation
+            if(!name || !email) { 
+                alert("Please fill required fields"); 
+                return; 
+            }
+
+            if (editRow) {
+                editRow.cells[1].innerText = name;
+                editRow.cells[2].innerText = email;
+                editRow.cells[3].innerText = qual;
+            } else {
+                addRowToTable(name, email, qual, new Date().toISOString().split('T')[0]);
+            }
+            closeForm();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
