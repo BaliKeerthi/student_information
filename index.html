@@ -207,15 +207,22 @@
         let editRow = null;
         let originalData = { name: "", email: "", qualification: "" };
 
-        // Note: XML request will only work if StudentsData.xml exists in the same folder
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                renderTable(this.responseXML);
-            }
-        };
-        xmlhttp.open("GET", "StudentsData.xml", true);
-        xmlhttp.send();
+       fetch("./StudentsData.xml")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("XML file not found");
+    }
+    return response.text();
+  })
+  .then(str => {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(str, "application/xml");
+    myFunction(xmlDoc);
+  })
+  .catch(error => {
+    console.error("Error loading XML:", error);
+  });
+
 
         function renderTable(xmlDoc) {
             if (!xmlDoc) return;
